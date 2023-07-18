@@ -19,11 +19,11 @@ oc new-app dotnet:6.0~https://github.com/alexgroom/inventory-api-1st-dotnet.git 
   -l app.openshift.io/runtime=dotnet 
 oc expose svc inventory-dotnet
 # Add component labels to group services
-oc label dc gateway app.kubernetes.io/part-of=coolstore
-oc label dc catalog app.kubernetes.io/part-of=coolstore
-oc label dc inventory app.kubernetes.io/part-of=coolstore
-oc label dc web app.kubernetes.io/part-of=coolstore
-oc label dc inventory-dotnet app.kubernetes.io/part-of=coolstore
+oc label deploy gateway app.kubernetes.io/part-of=coolstore
+oc label deploy catalog app.kubernetes.io/part-of=coolstore
+oc label deploy inventory app.kubernetes.io/part-of=coolstore
+oc label deploy web app.kubernetes.io/part-of=coolstore
+oc label deploy inventory-dotnet app.kubernetes.io/part-of=coolstore
 # add databases components for inventory and catalog
 #
 oc process -n openshift postgresql-persistent --param=DATABASE_SERVICE_NAME=catalog-postgresql \
