@@ -26,14 +26,14 @@ oc label dc web app.kubernetes.io/part-of=coolstore
 oc label dc inventory-dotnet app.kubernetes.io/part-of=coolstore
 # add databases components for inventory and catalog
 #
-oc process -n openshift postgresql-ephemeral --param=DATABASE_SERVICE_NAME=catalog-postgresql \
+oc process -n openshift postgresql-persistent --param=DATABASE_SERVICE_NAME=catalog-postgresql \
         --param=POSTGRESQL_DATABASE=catalogdb --param=POSTGRESQL_USER=catalog \
         --param=POSTGRESQL_PASSWORD=catalog \
         --labels=app=catalog \
         --labels=app.openshift.io/runtime=postgresql \
           | oc create -f -
 
-oc process -n openshift mariadb-ephemeral --param=DATABASE_SERVICE_NAME=inventory-mariadb \
+oc process -n openshift mariadb-persistent --param=DATABASE_SERVICE_NAME=inventory-mariadb \
         --param=MYSQL_DATABASE=inventorydb --param=MYSQL_USER=inventory \
         --param=MYSQL_PASSWORD=inventory --param=MYSQL_ROOT_PASSWORD=inventoryadmin \
         --labels=app=inventory \
